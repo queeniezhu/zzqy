@@ -1,0 +1,26 @@
+select a.id_No,
+       a.create_Time,
+       a.job_number,
+       a.id,
+       a.org,
+       a.assure_Name,
+       a.name,
+       a.id_Type,
+       a.stock_Limit,
+       a.label_Cost,
+       a.preliminary_Credit,
+       a.business_Year,
+       a.business_Scale,
+       a.profit_Year,
+       a.loanbank_Num,
+       a.status,
+       a.is_Loan_Right,
+       b.app_No,
+       a.card_Id,
+       a.cust_Type
+  from Rmps_White_List a
+ left join (select app_no,white_list_id, max(create_time) as create_time
+               from tm_app_main
+              group by white_list_id,app_no) b on a.id = b.white_list_id
+                               and a.create_time = b.create_time
+ where a.acq_id='20000050'
